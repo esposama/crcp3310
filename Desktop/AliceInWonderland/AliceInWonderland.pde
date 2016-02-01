@@ -30,13 +30,11 @@ void setup() {
     pallette[i] = color(random(255, 255));
   }
   size (1000, 1000); 
-  letterViz = createImage(1000, 2800, RGB);
+  letterViz = createImage(1000, 1000, RGB);
   letterViz.loadPixels();
+  state = DRAW_LETTER_STATE;
   prepareFrequencies(); 
   letterViz.updatePixels();
-  state = DRAW_LETTER_STATE; 
-  //prepareFrequencies(); 
-  //letterViz.updatePixels();
 }
 
 void draw() { 
@@ -54,11 +52,12 @@ void mousePressed() {
 }
 
 void drawFrequenciesGraph() { 
-  fill(100); 
-  text ("Bar graph here.", 100, 100);
-  background(255);
-  pieChart(700, angles);
-  noStroke(); 
+  //fill(100); 
+  //text ("Bar graph here.", 100, 100);
+  //background(255);
+  //pieChart(700, angles);
+  //noStroke();
+  image(letterViz, 0, 0); 
 } 
 
 void pieChart(float diameter, int[] data) {
@@ -73,8 +72,10 @@ void pieChart(float diameter, int[] data) {
 
 void drawLetterVisualization() { 
   background(255);
-  text("Drawling all the letters.", 100, 100); 
-  image(letterViz, 0, 0); 
+  text("Drawling all the letters.", 10, 20); 
+  text( "Max: " + maxFrequency +  " Most Frequent Letter: " + mostFrequentLetter, 10, 40);
+  text( "Min: " + minFrequency + " Least Frequent Letter: " + leastFrequentLetter, 10, 60);
+  text( "Alice counter: " + alice, 10, 80); 
   for (int i = 0; i < frequencies.length; ++i) { 
     fill(pallette[i]); 
     ellipse(ellipsePositionX[i], ellipsePositionY[i], frequencies[i]/50, frequencies[i]/50); 
@@ -88,7 +89,7 @@ void prepareFrequencies() {
     frequencies[i] = 0; 
     ellipsePositionX[i] = (int)random(width);
     ellipsePositionY[i] = (int)random(height);
-    pallette[i] = color(random(0, 50), random(150, 255), random(50, 200), 150);
+    pallette[i] = color(random(0, 255), random(0, 255), random(0, 255), 150);
   } 
   reader = createReader(FILENAME);
   int pixelPosition = 0;  
@@ -104,17 +105,12 @@ void prepareFrequencies() {
         }  
       char letter = (char)Character.toLowerCase(character);  //converts letter to lower case
       possibleAlice += letter; 
-      frequencies[letter - ASCCII_OFFSET]++; // lower case letter - asccii ASCCII_OFFSET
-      if (Character.isAlphabetic(character)) {
-          if (possibleAlice.compareTo("alice") == 0){
-            letterViz.pixels[pixelPosition] = pallette[0];   
-            pixelPosition++; 
-          } 
-          for (int i = 0; i =< LETTERS_IN_ALAPHABET; i++) { 
-          letterViz.pixels[pixelPosition] = pallette[i];   
-          pixelPosition++; 
-        }
-      } 
+      frequencies[letter - ASCCII_OFFSET]++;  // lower case letter - asccii ASCCII_OFFSET 
+      for (int i = 0; i < LETTERS_IN_ALAPHABET; i++) { 
+      pallette[i] = color(random(0, 255), random(0, 255), random(0, 255), 150);
+      letterViz.pixels[pixelPosition] = pallette[i]; 
+        } 
+      pixelPosition++;  
       if (frequencies[letter - ASCCII_OFFSET] > maxFrequency) { 
         mostFrequentLetter = letter; 
         maxFrequency = frequencies[letter - ASCCII_OFFSET]; 
@@ -129,8 +125,8 @@ void prepareFrequencies() {
     e.printStackTrace(); 
   }
   println(frequencies); 
-  println( "max: " + maxFrequency + mostFrequentLetter);
-  println( "min: " + minFrequency + leastFrequentLetter);
+  println( "max: " + maxFrequency +  " Most Frequent Letter: " + mostFrequentLetter);
+  println( "min: " + minFrequency + " Least Frequent Letter: " + leastFrequentLetter);
   println( "Alice counter: " + alice);  
 } 
 

@@ -67,11 +67,12 @@ public void mousePressed() {
   state = (state + 1) % 2;  
 }
 
-public void drawFrequenciesGraph() { 
+public void drawLetterVisualization() { 
+  fill(255, 100, 0);
   image(letterViz, 0, 0); 
 } 
 
-public void drawLetterVisualization() { 
+public void drawFrequenciesGraph() { 
   background(255);
   text("Drawling all the letters.", 10, 20); 
   text( "Max: " + maxFrequency +  " Most Frequent Letter: " + mostFrequentLetter, 10, 40);
@@ -79,7 +80,7 @@ public void drawLetterVisualization() {
   text( "Alice counter: " + alice, 10, 80); 
   for (int i = 0; i < frequencies.length; ++i) { 
     fill(pallette[i]); 
-    ellipse(ellipsePositionX[i], ellipsePositionY[i], frequencies[i]/50, frequencies[i]/50); 
+    ellipse(ellipsePositionX[i] /2, ellipsePositionY[i]/2 , frequencies[i]/40, frequencies[i]/40); 
     char letter = (char)(i + 97); 
     fill(0); 
     text(letter, ellipsePositionX[i], ellipsePositionY[i]); 

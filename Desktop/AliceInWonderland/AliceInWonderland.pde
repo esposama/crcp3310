@@ -1,5 +1,7 @@
-//Miss Perfect                                                                      
+//Amanda Esposito                                                                      
 //Project 1: Visualiing text data 
+//I took Alice in Wonderland Text and displayed the data in two different data visualizations. 
+
 BufferedReader reader; 
 final String FILENAME = "Alice.txt"; 
 
@@ -76,6 +78,8 @@ void drawLetterVisualization() {
   text( "Max: " + maxFrequency +  " Most Frequent Letter: " + mostFrequentLetter, 10, 40);
   text( "Min: " + minFrequency + " Least Frequent Letter: " + leastFrequentLetter, 10, 60);
   text( "Alice counter: " + alice, 10, 80); 
+  text("Amanda Esposito", 2000, 20); 
+  text("");
   for (int i = 0; i < frequencies.length; ++i) { 
     fill(pallette[i]); 
     ellipse(ellipsePositionX[i], ellipsePositionY[i], frequencies[i]/50, frequencies[i]/50); 

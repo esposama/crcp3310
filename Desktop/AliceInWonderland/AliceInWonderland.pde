@@ -24,8 +24,6 @@ char leastFrequentLetter;
 char mostFrequentLetter; 
 String possibleAlice = ""; 
 int alice; 
-int[] angles = { 347, 2, 11}; 
-float lastAng = 0;
 
 void setup() { 
   for (int i = 0; i < LETTERS_IN_ALAPHABET; i++){ 
@@ -54,23 +52,8 @@ void mousePressed() {
 }
 
 void drawFrequenciesGraph() { 
-  //fill(100); 
-  //text ("Bar graph here.", 100, 100);
-  //background(255);
-  //pieChart(700, angles);
-  //noStroke();
   image(letterViz, 0, 0); 
 } 
-
-void pieChart(float diameter, int[] data) {
-  float lastAngle = 0;
-  for (int i = 0; i < data.length; i++) {
-    fill(angles[i] * 3.0);
-    fill(pallette[i]);  
-    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
-    lastAngle += radians(angles[i]);
-  }
-}
 
 void drawLetterVisualization() { 
   background(255);
@@ -78,8 +61,6 @@ void drawLetterVisualization() {
   text( "Max: " + maxFrequency +  " Most Frequent Letter: " + mostFrequentLetter, 10, 40);
   text( "Min: " + minFrequency + " Least Frequent Letter: " + leastFrequentLetter, 10, 60);
   text( "Alice counter: " + alice, 10, 80); 
-  text("Amanda Esposito", 2000, 20); 
-  text("");
   for (int i = 0; i < frequencies.length; ++i) { 
     fill(pallette[i]); 
     ellipse(ellipsePositionX[i], ellipsePositionY[i], frequencies[i]/50, frequencies[i]/50); 
@@ -111,8 +92,13 @@ void prepareFrequencies() {
       possibleAlice += letter; 
       frequencies[letter - ASCCII_OFFSET]++;  // lower case letter - asccii ASCCII_OFFSET 
       for (int i = 0; i < LETTERS_IN_ALAPHABET; i++) { 
+        if (possibleAlice.compareTo("alice") == 1){ 
+          letterViz.pixels[pixelPosition] = pallette[0];
+          pallette[0] = color(0);  
+        } else { 
       pallette[i] = color(random(0, 255), random(0, 255), random(0, 255), 150);
-      letterViz.pixels[pixelPosition] = pallette[i]; 
+      letterViz.pixels[pixelPosition] = pallette[i];
+      }  
         } 
       pixelPosition++;  
       if (frequencies[letter - ASCCII_OFFSET] > maxFrequency) { 

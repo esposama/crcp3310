@@ -138,7 +138,7 @@ class SetWalker {
   float xOffset;
 
   ArrayList<Food> data = new ArrayList<Food>();
-  //ArrayList<Color> c = new ArrayList<Color>(); 
+  ArrayList<Integer> colors = new ArrayList<Integer>(); 
 
   public SetWalker(PVector initialLocation) {
     this.location = initialLocation;
@@ -150,9 +150,9 @@ class SetWalker {
 
   public void draw() {
 	stroke(10); 
-	line(0, 720, 1600, 720);
-	line(250, 720, 250,  2560); 
-	line(500, 720, 500,  2560); 
+	line(0, 690, 1600, 690);
+	line(250, 690, 250,  2560); 
+	line(500, 690, 500,  2560); 
 	noStroke();
     ellipse(location.x, location.y, WIDTH, WIDTH);
     for (Food f : data) {
@@ -181,12 +181,19 @@ class SetWalker {
   public void eat(Food f) {
 	// if the color is already present do nothing
 	//if not set contains food color then add 
-	if (!data.contains(f.c)) { 
-	data.add(f);
-	f.location.x = random(250, 500);
-    f.location.y = random(height - 200, height);
+	boolean containsColor = false; 
+	for (int i = 0; i < colors.size(); i++){ 
+		if (colors.get(i) == f.c) {
+		containsColor = true; 
+		}
 	}
-	}
+		if (!containsColor) { 
+		data.add(f);
+		f.location.x = random(250, 500);
+        f.location.y = random(height - 200, height);
+		colors.add(f.c); 
+		}
+  }
 } 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Project2safari" };

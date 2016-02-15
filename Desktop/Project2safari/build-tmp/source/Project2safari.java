@@ -22,6 +22,7 @@ final int NUMBER_OF_FOODS = 100;
 final int NUMBER_OF_COLORS = 10;
 int[] colors = new int[NUMBER_OF_COLORS];
 
+
 public void setup() {
   background(0);
   //size(1000, 700);
@@ -47,14 +48,20 @@ public void draw() {
     Food f = foods.get(i);
     f.draw();
 	if (walker.isTouching(f)) {
-      walker.eat(f);
-      foods.remove(f);
+		walker.eat(f); 
+		foods.remove(f); 
+	} 
+	if ((walker.location.x > width/4) && (walker.location.x < width/2) || (walker.location.x > ((width/4)*3))) {
+		walker.deleteFood(f); 
     }
 	if (setWalker.isTouching(f)) {
-      setWalker.eat(f);
-      foods.remove(f);
-    }
+		setWalker.eat(f); 
+		foods.remove(f); 
 	} 
+	if ((setWalker.location.x > width/4) && (setWalker.location.x < width/2) || (setWalker.location.x > ((width/4)*3))) {
+		setWalker.deleteFood(f); 
+	}
+   }
 } 
 class Walker {
 
@@ -105,9 +112,14 @@ class Walker {
 
   public void eat(Food f) {
     data.add(f);
-    f.location.x = random(0, 250);
+    f.location.x = random(0, width/4);
     f.location.y = random(height - 200, height);
   }
+
+  public void deleteFood(Food f){
+   data.remove(f);
+  }
+
 }
 class Food {
 
@@ -151,8 +163,20 @@ class SetWalker {
   public void draw() {
 	stroke(10); 
 	line(0, 690, 1600, 690);
-	line(250, 690, 250,  2560); 
-	line(500, 690, 500,  2560); 
+	line(width/4, 0, width/4,  2560); 
+	line(width/2, 0, width/2,  2560); 
+	line(((width/4)*3), 0, ((width/4)*3), 2560);
+	fill(0); 
+	textSize(24);
+    text("Add", 150 , 100);
+    text("Bag", 150, 750); 
+    text("Delete", 500 , 100);
+    text("Set", 500, 750); 
+    text("Add", 850 , 100);
+    text("Queue", 850, 750); 
+    text("Delete", 1200 , 100);
+    text("Stack", 1200 , 750);
+    
 	noStroke();
     ellipse(location.x, location.y, WIDTH, WIDTH);
     for (Food f : data) {
@@ -189,12 +213,20 @@ class SetWalker {
 	}
 		if (!containsColor) { 
 		data.add(f);
-		f.location.x = random(250, 500);
+		f.location.x = random(width/4, width/2);
         f.location.y = random(height - 200, height);
 		colors.add(f.c); 
 		}
   }
+   public void deleteFood(Food f){
+   data.remove(f);
+}
 } 
+class queueWalker { 
+
+
+
+}
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Project2safari" };
     if (passedArgs != null) {

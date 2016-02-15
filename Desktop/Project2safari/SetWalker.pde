@@ -23,8 +23,20 @@ class SetWalker {
   public void draw() {
 	stroke(10); 
 	line(0, 690, 1600, 690);
-	line(250, 690, 250,  2560); 
-	line(500, 690, 500,  2560); 
+	line(width/4, 0, width/4,  2560); 
+	line(width/2, 0, width/2,  2560); 
+	line(((width/4)*3), 0, ((width/4)*3), 2560);
+	fill(0); 
+	textSize(24);
+    text("Add", 150 , 100);
+    text("Bag", 150, 750); 
+    text("Delete", 500 , 100);
+    text("Set", 500, 750); 
+    text("Add", 850 , 100);
+    text("Queue", 850, 750); 
+    text("Delete", 1200 , 100);
+    text("Stack", 1200 , 750);
+    
 	noStroke();
     ellipse(location.x, location.y, WIDTH, WIDTH);
     for (Food f : data) {
@@ -61,9 +73,12 @@ class SetWalker {
 	}
 		if (!containsColor) { 
 		data.add(f);
-		f.location.x = random(250, 500);
+		f.location.x = random(width/4, width/2);
         f.location.y = random(height - 200, height);
 		colors.add(f.c); 
 		}
   }
+   public void deleteFood(Food f){
+   data.remove(f);
+}
 } 

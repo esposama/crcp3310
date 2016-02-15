@@ -47,7 +47,12 @@ class Walker {
 
   public void eat(Food f) {
     data.add(f);
-    f.location.x = random(0, 250);
+    f.location.x = random(0, width/4);
     f.location.y = random(height - 200, height);
   }
+
+  public void deleteFood(Food f){
+   data.remove(f);
+  }
+
 }

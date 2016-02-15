@@ -6,6 +6,7 @@ final int NUMBER_OF_FOODS = 100;
 final int NUMBER_OF_COLORS = 10;
 color[] colors = new color[NUMBER_OF_COLORS];
 
+
 void setup() {
   background(0);
   //size(1000, 700);
@@ -31,12 +32,18 @@ void draw() {
     Food f = foods.get(i);
     f.draw();
 	if (walker.isTouching(f)) {
-      walker.eat(f);
-      foods.remove(f);
+		walker.eat(f); 
+		foods.remove(f); 
+	} 
+	if ((walker.location.x > width/4) && (walker.location.x < width/2) || (walker.location.x > ((width/4)*3))) {
+		walker.deleteFood(f); 
     }
 	if (setWalker.isTouching(f)) {
-      setWalker.eat(f);
-      foods.remove(f);
-    }
+		setWalker.eat(f); 
+		foods.remove(f); 
 	} 
+	if ((setWalker.location.x > width/4) && (setWalker.location.x < width/2) || (setWalker.location.x > ((width/4)*3))) {
+		setWalker.deleteFood(f); 
+	}
+   }
 } 

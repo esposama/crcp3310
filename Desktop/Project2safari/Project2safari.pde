@@ -1,3 +1,10 @@
+//Amanda Esposito Project #2 Safari 
+//In this project I used 4 different kinds of data structures and 4 different walkers. Each walker descibed a different data structure. 
+//Each walker would collect balls and sorta them based off the kind of data structure. The screen is divided into 4 different section that 
+//would be either add or delete. When each walker enter these different zones based off the data structure they represented would act differently. 
+//I learned how to impletement each structure and what each data structure meant in this project. 
+
+
 Walker walker;
 SetWalker setWalker;
 QueueWalker queueWalker;

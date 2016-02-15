@@ -1,7 +1,7 @@
-class Walker {
+class StackWalker {
 
   final int MAX_VELOCITY = 2;
-  final float NOISE_DELTA = .01;
+  final float NOISE_DELTA = .03;
   final int WIDTH = 100;
   PVector location;
   PVector velocity;
@@ -10,9 +10,10 @@ class Walker {
   float xOffset;
 
   ArrayList<Food> data = new ArrayList<Food>();
- ArrayList<Integer> colors = new ArrayList<Integer>(); 
+  ArrayList<Integer> colors = new ArrayList<Integer>(); 
 
-  public Walker(PVector initialLocation) {
+
+  public StackWalker(PVector initialLocation) {
     this.location = initialLocation;
     velocity = new PVector(1, 0);
     acceleration = new PVector(1, 0);
@@ -21,13 +22,13 @@ class Walker {
   }
 
   public void draw() {
-	fill(0);
+	    fill(0);
     ellipse(location.x,location.y,WIDTH,WIDTH);
 
     textSize(12);
 	fill(255);
     textAlign(CENTER);
-    text("Bag Walker", location.x, location.y);
+    text("Stack Walker", location.x, location.y);
     for (Food f : data) {
       fill(f.c);
       ellipse(f.location.x, f.location.y, 20, 20);
@@ -52,19 +53,19 @@ class Walker {
   }
 
   public void eat(Food f) {
+
     data.add(f);
-    f.location.x = random(0, width/4);
-    f.location.y = random(height - 200, height);
+	for(int i = 0; i < data.size(); i++) { 
+		data.get(i).location.x = (width/4)*3+ 20*i;
+	}
+    f.location.y = height - 200;
   }
 
-    public void deleteFood(Food f){
-    data.remove(f); 
-  	for (int i = 0; i < data.size(); i++) {
- 		if(data.get(i).c == f.c) 
- 		data.remove(i);  
- 		break; 
- 	} for (int i = 0; i < colors.size(); i++) { 
-    	colors.remove(f.c); 
-    }
-  } 
-}
+  public void deleteFood(Food f){
+  	if (!data.isEmpty()){ 
+ 		if(data.get(data.size()-1).c == f.c){
+ 		data.remove(data.size()-1);  
+    } 
+  }
+} 
+}  

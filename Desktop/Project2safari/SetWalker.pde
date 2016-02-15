@@ -1,6 +1,6 @@
 class SetWalker {
 
-  final int MAX_VELOCITY = 1;
+  final int MAX_VELOCITY = 2;
   final float NOISE_DELTA = .04;
   final int WIDTH = 100;
   PVector location;
@@ -21,7 +21,15 @@ class SetWalker {
   }
 
   public void draw() {
-	stroke(10); 
+	fill(0);
+    ellipse(location.x,location.y,WIDTH,WIDTH);
+
+    textSize(12);
+	fill(255);
+    textAlign(CENTER);
+    text("Set Walker", location.x, location.y);
+	stroke(20); 
+	fill(0); 
 	line(0, 690, 1600, 690);
 	line(width/4, 0, width/4,  2560); 
 	line(width/2, 0, width/2,  2560); 
@@ -36,9 +44,7 @@ class SetWalker {
     text("Queue", 850, 750); 
     text("Delete", 1200 , 100);
     text("Stack", 1200 , 750);
-    
-	noStroke();
-    ellipse(location.x, location.y, WIDTH, WIDTH);
+  
     for (Food f : data) {
       fill(f.c);
       ellipse(f.location.x, f.location.y, 20, 20);
@@ -79,6 +85,12 @@ class SetWalker {
 		}
   }
    public void deleteFood(Food f){
-   data.remove(f);
-}
+   	data.remove(f); 
+   	for (int i = 0; i < data.size(); i++) { 
+  	if (data.get(i).c == f.c) {  
+ 		data.remove(i);  
+ 		break; 
+    }
+   } 
+  } 
 } 

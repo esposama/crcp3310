@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby 
-# Amanda Esposito Project 4 
 # CRCP 3310 Project 3: This is a simple database-backed song application. 
-# This program takes information from a simple database and lets the user add new genres, albums, artists, and songs to the database. 
 
 require 'sqlite3'
 

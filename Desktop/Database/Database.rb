@@ -28,10 +28,22 @@ def add_new_song
 	puts "New song name: "
 	user_song = gets 
 	user_song.chomp 
+	puts "Genres: "
 	@db.execute(SQL_SELECT_GENRES) do |row| 
 		puts "#{row[0]}. #{row[1]}}"
 	end 
-	puts "Select "
+	puts "Select a genre's id: "
+	song_genre_id = gets 
+	song_genre_id.chomp 
+	puts "Albums: "
+	db.execute(SQL_SELECT_ALBUMS) do |row| 
+		puts "#{row[0]}. #{row[1]}}"
+	end 
+	puts "Select an album's id: "
+	song_album_id = gets 
+	song_album_id.chomp 
+	song_name = "INSERT INTO songs(name, genre_id, album_id) VALUES (('#{user_song}, '#{song_genre_id}', '#{song_album_id}')" 
+	db.execute(song_name)
 end 
 
 def add_new_genre 
@@ -87,5 +99,6 @@ def add_new_schema
 		puts row.join " | "
 	end 
 end 
+
 
 db.close 

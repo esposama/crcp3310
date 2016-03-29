@@ -58,9 +58,14 @@ def add_new_album
 	puts "New album name: "
 	user_album = gets 
 	user_album.chomp 
-	id = @db.execute()
-db.execute(SQL_SELECT_ALBUM) do |row| 
-	p row 
+	db.execute(SQL_SELECT_ARTISTS) do |row| 
+		puts "{row[0]}. #{row[1]}" 
+	end
+	puts "Select an artist's id: " 
+	artist_id = gets 
+	artist_id.chomp 
+	artist_id_column = "INSERT INTO albums (name, artist_id) VALUES ('#{new_album}, '#{artist_id}')"
+	db.execute(artist_id_column)
 end 
 
 def add_new_schema 

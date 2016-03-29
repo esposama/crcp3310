@@ -101,8 +101,8 @@ def add_new_schema
 	db.close 
 end 
 
-go = true;
-while go do
+run = true;
+while run do
 	initialize_startscreen;
 	if input = "1" 
 		add_new_schema;

@@ -21,7 +21,6 @@ def initialize_startscreen
 	puts "4. Add a new artist."
 	puts "5. Add a new song."
 	puts "Enter a choice: "
-	user_input = gets.chomp 
 end 
 
 def add_new_song
@@ -43,7 +42,7 @@ def add_new_genre
 	puts "New genre name: "
 	user_genre = gets 
 	user_genre.chomp 
-	genres_table = "INSERT INTO genres (name) VALUES ('#{add_new_genre}')"
+	genres_table = "INSERT INTO genres (name) VALUES ('#{user_genre}')"
 	db.execute(genres_table)
 	db.execute(SQL_SELECT_GENRES) do |row| 
 		puts row[1]
@@ -64,8 +63,22 @@ def add_new_album
 	puts "Select an artist's id: " 
 	artist_id = gets 
 	artist_id.chomp 
-	artist_id_column = "INSERT INTO albums (name, artist_id) VALUES ('#{new_album}, '#{artist_id}')"
+	artist_id_column = "INSERT INTO albums (name, artist_id) VALUES ('#{user_album}, '#{artist_id}')"
 	db.execute(artist_id_column)
+end 
+def add_new_artist
+	puts "Artists in the database: "
+	@db.execute(SQL_SELECT_ARTISTS) do |row| 
+		puts row[1]
+	end 
+	puts "New artist name: "
+	user_artist = gets 
+	user_artist.chomp 
+	artist_table = "INSERT INTO artist (name) VALUES ('#{user_artist}')"
+	db.execute(artists_table)
+	db.execute(SQL_SELECT_ARTISTS) do |row| 
+		puts row[1]
+	end 
 end 
 
 def add_new_schema 

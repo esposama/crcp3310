@@ -98,7 +98,23 @@ def add_new_schema
 	db.execute(SQL_SCHEMA) do |row| 
 		puts row.join " | "
 	end 
+	db.close 
 end 
 
+go = true;
+while go do
+	initialize_startscreen;
+	if input = "1" 
+		add_new_schema;
+	elsif input = "2" 
+		add_new_genre;
+	elsif input = "3" 
+		add_new_album;
+	elsif input = "4" 
+		add_new_artist;
+	elsif input = "5" 
+		add_new_song;
+	end
+end
 
-db.close 
+
